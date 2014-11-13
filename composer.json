@@ -1,0 +1,23 @@
+{
+    "name": "rudak/contact-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 ContactBundle, a simple contact page for your website",
+    "keywords": ["contact"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kadur Arnaud",
+            "email": "contact@kadur-arnaud.fr",
+            "homepage": "http://kadur-arnaud.fr"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-0": {
+            "Rudak\\ContactBundle": ""
+        }
+    },
+    "target-dir": "Rudak/ContactBundle",
+    "minimum-stability": "stable"
+}
