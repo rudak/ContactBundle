@@ -1,0 +1,21 @@
+admin_contact:
+    path:     /
+    defaults: { _controller: "RudakContactBundle:Contact:index" }
+
+admin_contact_show:
+    path:     /{id}/show
+    defaults: { _controller: "RudakContactBundle:Contact:show" }
+
+admin_contact_new:
+    path:     /new
+    defaults: { _controller: "RudakContactBundle:Contact:new" }
+
+admin_contact_create:
+    path:     /create
+    defaults: { _controller: "RudakContactBundle:Contact:create" }
+    requirements: { _method: post }
+
+admin_contact_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "RudakContactBundle:Contact:delete" }
+    requirements: { _method: post|delete }

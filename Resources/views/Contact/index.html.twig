@@ -1,0 +1,45 @@
+{% extends admin_layout %}
+
+{% block layout %}
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ path('rcmAdminIndex') }}">Administration</a>
+        </li>
+        <li class="active">Contacts</li>
+    </ol>
+
+    <table class="table table-responsive table-condensed">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Téléphone</th>
+            <th>Email</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr {% if entity.isRead == false %} class="success"{% endif %}>
+                <td>
+                    {{ entity.name }}
+                </td>
+                <td>{{ entity.phone }}</td>
+                <td>{{ entity.email }}</td>
+                <td>
+                    {% if entity.date %}
+                        {{ entity.date|date('d/m/Y \\à H:i:s') }}
+                    {% endif %}
+                </td>
+                <td>
+                    <a
+                            href="{{ path('admin_contact_show', { 'id': entity.id }) }}"
+                            class="btn btn-default btn-sm">
+                        Voir
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

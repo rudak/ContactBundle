@@ -1,0 +1,15 @@
+rudak_contact_admin_contact:
+    resource: "@RudakContactBundle/Resources/config/routing/contact.yml"
+    prefix:   /admin/contact
+
+rudak_contact:
+    path:     /contact
+    defaults: { _controller: RudakContactBundle:Default:index }
+
+rudak_contact_creation:
+    path:     /creer-le-contact
+    defaults: { _controller: RudakContactBundle:Default:create }
+    requirements:
+        _method: POST
+
+
