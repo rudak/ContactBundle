@@ -34,11 +34,22 @@ class DefaultController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Message envoyé avec succès!'
+            );
+
             return $this->redirect($this->generateUrl('rudak_contact'));
         }
 
+
+        $this->get('session')->getFlashBag()->add(
+            'warning',
+            'Problème d\'envoi du message !'
+        );
+
         return $this->render('RudakContactBundle:Default:index.html.twig', array(
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -49,7 +60,12 @@ class DefaultController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Envoyer ce message',
+            'attr'  => array(
+                'class' => 'btn btn-success'
+            )
+        ));
 
         return $form;
     }

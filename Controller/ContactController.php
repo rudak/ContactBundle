@@ -48,8 +48,18 @@ class ContactController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Message envoyé avec succès !'
+            );
+
             return $this->redirect($this->generateUrl('admin_contact'));
         }
+
+        $this->get('session')->getFlashBag()->add(
+            'warning',
+            'Problème d\'envoi du message !'
+        );
 
         return $this->render('RudakContactBundle:Contact:new.html.twig', array(
             'entity' => $entity,
@@ -136,8 +146,17 @@ class ContactController extends Controller
 
             $em->remove($entity);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Message supprimé avec succès !'
+            );
         }
 
+        $this->get('session')->getFlashBag()->add(
+            'warning',
+            'Problème de suppression du message !'
+        );
         return $this->redirect($this->generateUrl('admin_contact'));
     }
 
@@ -153,7 +172,12 @@ class ContactController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_contact_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Supprimer ce message',
+                'attr'  => array(
+                    'class' => 'btn btn-danger'
+                )
+            ))
             ->getForm();
     }
 }
