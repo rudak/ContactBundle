@@ -151,6 +151,7 @@ class ContactController extends Controller
                 'success',
                 'Message supprimé avec succès !'
             );
+            return $this->redirect($this->generateUrl('admin_contact'));
         }
 
         $this->get('session')->getFlashBag()->add(
