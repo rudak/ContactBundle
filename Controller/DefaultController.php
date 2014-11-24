@@ -10,11 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    const ACTIVE_ITEM = 'contact';
+
     public function indexAction()
     {
         $entity = new Contact();
         $form   = $this->getCreateForm($entity);
-
+        $this->get('MenuBundle.Handler')->setActiveItem(self::ACTIVE_ITEM);
         return $this->render('RudakContactBundle:Default:index.html.twig', array(
             'form' => $form->createView()
         ));
