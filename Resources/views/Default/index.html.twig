@@ -2,8 +2,8 @@
 
 {% block layout %}
     <div class="row">
-        <div class="col-xs-12">
-            <h1>Contact</h1>
+        <div class="col-xs-9">
+            <h1 class="main_title">Contact</h1>
 
             <form action="{{ path('rudak_contact_creation') }}" method="post">
 
@@ -30,6 +30,9 @@
                 {{ form(form) }}
             </form>
 
+        </div>
+        <div class="col-xs-3">
+            <h2>truc a virer</h2>
         </div>
     </div>
 {% endblock %}

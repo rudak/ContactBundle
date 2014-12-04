@@ -16,17 +16,20 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'attr' => array(
+                'label' => 'Nom prénom',
+                'attr'  => array(
                     'class' => 'form-control'
                 )
             ))
             ->add('phone', 'text', array(
-                'attr' => array(
+                'label' => 'Téléphone',
+                'attr'  => array(
                     'class' => 'form-control'
                 )
             ))
             ->add('email', 'text', array(
-                'attr' => array(
+                'label' => 'eMail',
+                'attr'  => array(
                     'class' => 'form-control'
                 )
             ))
