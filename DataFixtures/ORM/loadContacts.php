@@ -11,8 +11,8 @@ namespace Rcm\RugbyBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Rudak\BlogBundle\Utils\Namer;
-use Rudak\BlogBundle\Utils\Syllabeur;
+use Rudak\UtilsBundle\Namer;
+use Rudak\UtilsBundle\Syllabeur;
 use Rudak\ContactBundle\Entity\Contact;
 
 
