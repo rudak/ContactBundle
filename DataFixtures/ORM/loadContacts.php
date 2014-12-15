@@ -11,6 +11,7 @@ namespace Rcm\RugbyBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Rudak\UtilsBundle\FakeContentGenerator;
 use Rudak\UtilsBundle\Namer;
 use Rudak\UtilsBundle\Syllabeur;
 use Rudak\ContactBundle\Entity\Contact;
@@ -27,7 +28,7 @@ class loadContacts implements FixtureInterface
             $tab[$i]->setName(Namer::getFirstName());
             $tab[$i]->setPhone('0' . rand(1, 5) . '.' . rand(15, 99) . '.' . rand(10, 99) . '.' . rand(10, 99) . '.' . rand(10, 99));
             $tab[$i]->setEmail(Syllabeur::getSyllabes(rand(2, 3)) . '@free.fr');
-            $tab[$i]->setMessage(Syllabeur::getMots(rand(10, 250)));
+            $tab[$i]->setMessage(FakeContentGenerator::getSentence());
             $tab[$i]->setIp(rand(15, 99999));
             $tab[$i]->setDate(new \DateTime(rand(-200, -2) . 'hour'));
             $tab[$i]->setIsRead(rand(0, 1));

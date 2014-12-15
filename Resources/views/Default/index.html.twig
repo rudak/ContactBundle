@@ -1,51 +1,30 @@
-{% extends 'RudakContactBundle::layout.html.twig' %}
+{% extends contact_layout %}
 
-{% block layout %}
-    <div class="row">
-        <div class="col-xs-12 col-sm-9">
-            <h1 class="main_title">Contact</h1>
+{% block content %}
+    <h1 class="main_title">Contact</h1>
 
-            <form action="{{ path('rudak_contact_creation') }}" method="post">
+    <form action="{{ path('rudak_contact_creation') }}" method="post">
 
-                <div class="form-group">
-                    {{ form_label(form.name) }}
-                    {{ form_errors(form.name) }}
-                    {{ form_widget(form.name) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.phone) }}
-                    {{ form_errors(form.phone) }}
-                    {{ form_widget(form.phone) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.email) }}
-                    {{ form_errors(form.email) }}
-                    {{ form_widget(form.email) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.message) }}
-                    {{ form_errors(form.message) }}
-                    {{ form_widget(form.message) }}
-                </div>
-                {{ form(form) }}
-            </form>
-
+        <div class="form-group">
+            {{ form_label(form.name) }}
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
         </div>
-        <div class="col-xs-12 col-sm-3">
-            <h2>truc a virer</h2>
-
-            <div class="well">
-                <h1>
-                    pub par ci
-                </h1>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicepudiandae sint tenetur. Est itaque, molestias
-                    praesentium provident quaerat ratione reprehenderit?</p>
-
-                <h2>pub par la</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque neque sed tempora.</p>
-            </div>
+        <div class="form-group">
+            {{ form_label(form.phone) }}
+            {{ form_errors(form.phone) }}
+            {{ form_widget(form.phone) }}
         </div>
-    </div>
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.message) }}
+            {{ form_errors(form.message) }}
+            {{ form_widget(form.message) }}
+        </div>
+        {{ form(form) }}
+    </form>
 {% endblock %}
