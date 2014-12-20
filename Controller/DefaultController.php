@@ -41,6 +41,8 @@ class DefaultController extends Controller
                 'Message envoyé avec succès!'
             );
 
+            $this->expedierMail($entity, $request);
+
             return $this->redirect($this->generateUrl('rudak_contact'));
         }
 
@@ -70,5 +72,22 @@ class DefaultController extends Controller
         ));
 
         return $form;
+    }
+
+    /**
+     * expédition du nombre de messages non lus
+     */
+    function expedierMail(Contact $contact, $request)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Nouveau contact sur rc-montbron.fr')
+            ->setContentType('text/html')
+            ->setFrom('contact@kadur-arnaud.fr')
+            ->setTo('contact@kadur-arnaud.fr')
+            ->setBody($this->renderView('RudakContactBundle:Mail:contact.html.twig', array(
+                'contact' => $contact,
+                'site'    => $request->getUriForPath('')
+            )));
+        return $this->get('mailer')->send($message);
     }
 }

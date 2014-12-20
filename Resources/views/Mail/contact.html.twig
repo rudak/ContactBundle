@@ -1,0 +1,23 @@
+<html>
+<head></head>
+<body>
+<h1>Nouveau message</h1>
+
+<p>Vous avez recu un nouveau message sur le site du RCM</p>
+
+<h3>Informations</h3>
+
+<ul>
+    <li>Date : {{ contact.date|date('d/m/Y H:i:s') }}</li>
+    <li>nom : {{ contact.name }}</li>
+    <li>tel : {{ contact.phone }}</li>
+    <li>e-Mail : {{ contact.email }}</li>
+    <li>ip : {{ contact.ip }}</li>
+    <li><a href="{{ site }}/admin/contact/">Lien direct vers le site</a></li>
+</ul>
+
+<h3>Message</h3>
+
+<div>{{ contact.message|nl2br }}</div>
+</body>
+</html>
