@@ -24,6 +24,7 @@
             {{ form_errors(form.message) }}
             {{ form_widget(form.message) }}
         </div>
-        {{ form(form) }}
+        {{ form_widget(form._token) }}
+        {{ form_widget(form.submit, { 'label': 'Cliquez ici' }) }}
     </form>
 {% endblock %}
