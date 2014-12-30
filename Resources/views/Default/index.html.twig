@@ -1,6 +1,6 @@
 {% extends contact_layout %}
 
-{% block content %}
+{% block content -%}
 
     <form action="{{ path('rudak_contact_creation') }}" method="post">
 
@@ -27,4 +27,4 @@
         {{ form_widget(form._token) }}
         {{ form_widget(form.submit, { 'label': 'Cliquez ici' }) }}
     </form>
-{% endblock %}
+{%- endblock %}
