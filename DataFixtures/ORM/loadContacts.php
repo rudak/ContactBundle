@@ -23,6 +23,8 @@ class loadContacts implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $tab = array();
+
+        echo "CREATION DES CONTACTS\n -------------------- \n";
         for ($i = 0; $i < rand(15, 35); $i++) {
             $tab[$i] = new Contact();
             $tab[$i]->setName(Namer::getFirstName());
@@ -38,5 +40,6 @@ class loadContacts implements FixtureInterface
         }
         echo "\n";
         $manager->flush();
+        echo "TERMINE\n -------------------- \n";
     }
 } 
