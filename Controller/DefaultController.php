@@ -79,11 +79,14 @@ class DefaultController extends Controller
      */
     function expedierMail(Contact $contact, $request)
     {
+        $to   = $this->container->getParameter('email_to');
+        $from = $this->container->getParameter('email_from');
+
         $message = \Swift_Message::newInstance()
             ->setSubject('Nouveau contact sur rc-montbron.fr')
             ->setContentType('text/html')
-            ->setFrom('site@rugby-club-montbronnais.fr')
-            ->setTo('contact@kadur-arnaud.fr')
+            ->setFrom($from)
+            ->setTo($to)
             ->setBody($this->renderView('RudakContactBundle:Mail:contact.html.twig', array(
                 'contact' => $contact,
                 'site'    => $request->getUriForPath('')
