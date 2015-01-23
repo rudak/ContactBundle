@@ -82,8 +82,8 @@ class DefaultController extends Controller
         $message = \Swift_Message::newInstance()
             ->setSubject('Nouveau contact sur rc-montbron.fr')
             ->setContentType('text/html')
-            ->setFrom('contact@kadur-arnaud.fr')
-            ->setTo('contact@kadur-arnaud.fr')
+            ->setFrom('site@rugby-club-montbron.fr')
+            ->setTo('site@rugby-club-montbron.fr')
             ->setBody($this->renderView('RudakContactBundle:Mail:contact.html.twig', array(
                 'contact' => $contact,
                 'site'    => $request->getUriForPath('')
