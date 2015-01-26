@@ -81,9 +81,10 @@ class DefaultController extends Controller
     {
         $to   = $this->container->getParameter('email_to');
         $from = $this->container->getParameter('email_from');
+        $subject = $this->container->getParameter('email_subject');
 
         $message = \Swift_Message::newInstance()
-            ->setSubject('Nouveau contact sur rugby-club-montbronnais.fr')
+            ->setSubject($subject)
             ->setContentType('text/html')
             ->setFrom($from)
             ->setTo($to)

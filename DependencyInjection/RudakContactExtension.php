@@ -27,5 +27,7 @@ class RudakContactExtension extends Extension
 
         $container->setParameter('email_from', $config['email_from']);
         $container->setParameter('email_to', $config['email_to']);
+        $container->setParameter('email_subject', $config['email_subject']);
+
     }
 }

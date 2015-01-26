@@ -19,6 +19,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('email_to')
                     ->defaultValue('to@email.fr')
                 ->end()
+                ->scalarNode('email_subject')
+                    ->defaultValue('Email subject default value')
+                ->end()
             ->end();
 
         return $treeBuilder;
