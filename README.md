@@ -20,3 +20,4 @@ ajouter la config qui va bien dans app/config.yml
         rudak_contact:
             email_from: email-from@email.fr
             email_to : email-to@email.fr
+            email_subject: 'Nouveau contact sur tonsite.fr'
