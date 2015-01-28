@@ -144,6 +144,8 @@ class ContactController extends Controller
                 throw $this->createNotFoundException('Unable to find Contact entity.');
             }
 
+            $this->logging($this->getUser()->getUsername(), sprintf('Suppression d\'un contact [#%d]', $entity->getId()), 'Contact');
+
             $em->remove($entity);
             $em->flush();
 
@@ -151,6 +153,8 @@ class ContactController extends Controller
                 'success',
                 'Message supprimé avec succès !'
             );
+
+
             return $this->redirect($this->generateUrl('admin_contact'));
         }
 
@@ -180,5 +184,22 @@ class ContactController extends Controller
                 )
             ))
             ->getForm();
+    }
+
+
+    private function logging($user, $action, $category)
+    {
+        /*
+        $this->logging(
+            $this->getUser()->getUsername(),
+            sprintf('Modification d\'un article [#%d]', $entity->getId()),
+            'Blog');
+        */
+
+        try {
+            $OwnLogger = $this->get('rudak.own.logger');
+            $OwnLogger->addEntry($user, $action, $category, new \DateTime());
+        } catch (\Exception $e) {
+        }
     }
 }
