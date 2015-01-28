@@ -12,7 +12,6 @@
         }
     ],
     "require": {
-        "rudak/own-logger-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": {
