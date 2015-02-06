@@ -22,8 +22,13 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('email_subject')
                     ->defaultValue('Email subject default value')
                 ->end()
+                ->scalarNode('use_reCaptcha')
+                    ->defaultFalse()
+                ->end()
+                ->scalarNode('reCaptcha_secret_key')
+                    ->defaultValue('azertyuiop123456789')
+                ->end()
             ->end();
-
         return $treeBuilder;
     }
 }

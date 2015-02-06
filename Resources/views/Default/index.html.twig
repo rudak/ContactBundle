@@ -24,7 +24,13 @@
             {{ form_errors(form.message) }}
             {{ form_widget(form.message) }}
         </div>
+        {% if recaptcha == true %}
+            <div style="margin-bottom: 20px;" class="clearfix">
+                <div class="g-recaptcha pull-right" data-sitekey="6LePoAETAAAAAEicOlo45yX-cLjwArAFclE22e-o"></div>
+            </div>
+        {% endif %}
         {{ form_widget(form._token) }}
         {{ form_widget(form.submit) }}
     </form>
+
 {%- endblock %}

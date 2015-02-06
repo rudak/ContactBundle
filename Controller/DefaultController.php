@@ -4,6 +4,7 @@ namespace Rudak\ContactBundle\Controller;
 
 use Rudak\ContactBundle\Entity\Contact;
 use Rudak\ContactBundle\Form\ContactType;
+use Rudak\ContactBundle\ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +18,10 @@ class DefaultController extends Controller
         $entity = new Contact();
         $form   = $this->getCreateForm($entity);
         $this->get('MenuBundle.Handler')->setActiveItem(self::ACTIVE_ITEM);
+        $use_recaptcha = $this->container->getParameter('use_reCaptcha');
         return $this->render('RudakContactBundle:Default:index.html.twig', array(
-            'form' => $form->createView()
+            'form'      => $form->createView(),
+            'recaptcha' => $use_recaptcha,
         ));
     }
 
@@ -32,18 +35,39 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                'Message envoyé avec succès!'
-            );
+            $use_recaptcha = $this->container->getParameter('use_reCaptcha');
+            if ($use_recaptcha) {
+                $resp = $this->getReCaptchaResponse();
 
-            $this->expedierMail($entity, $request);
+                if ($this->isReCaptchaResponseOk($resp)) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($entity);
+                    $em->flush();
 
-            return $this->redirect($this->generateUrl('rudak_contact'));
+                    $this->get('session')->getFlashBag()->add(
+                        'success',
+                        'Message envoyé avec succès!'
+                    );
+
+                    $this->expedierMail($entity, $request);
+
+                    return $this->redirect($this->generateUrl('rudak_contact'));
+                }
+            } else {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'success',
+                    'Message envoyé avec succès!'
+                );
+
+                $this->expedierMail($entity, $request);
+
+                return $this->redirect($this->generateUrl('rudak_contact'));
+            }
         }
 
 
@@ -53,8 +77,39 @@ class DefaultController extends Controller
         );
 
         return $this->render('RudakContactBundle:Default:index.html.twig', array(
-            'form' => $form->createView(),
+            'form'      => $form->createView(),
+            'recaptcha' => $use_recaptcha
         ));
+    }
+
+    private function getReCaptchaResponse()
+    {
+        $secret = $this->container->getParameter('reCaptcha_secret_key');
+
+        // The response from reCAPTCHA
+        $resp = null;
+        // The error code from reCAPTCHA, if any
+        $error     = null;
+        $reCaptcha = new ReCaptcha($secret);
+
+        // Was there a reCAPTCHA response?
+        if ($_POST["g-recaptcha-response"]) {
+            return $reCaptcha->verifyResponse(
+                $_SERVER["REMOTE_ADDR"],
+                $_POST["g-recaptcha-response"]
+            );
+        } else {
+            return false;
+        }
+    }
+
+    private function isReCaptchaResponseOk($resp)
+    {
+        if (isset($resp) && $resp != null && $resp->success) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private function getCreateForm(Contact $entity)
@@ -79,8 +134,8 @@ class DefaultController extends Controller
      */
     function expedierMail(Contact $contact, $request)
     {
-        $to   = $this->container->getParameter('email_to');
-        $from = $this->container->getParameter('email_from');
+        $to      = $this->container->getParameter('email_to');
+        $from    = $this->container->getParameter('email_from');
         $subject = $this->container->getParameter('email_subject');
 
         $message = \Swift_Message::newInstance()
