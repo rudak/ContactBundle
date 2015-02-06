@@ -21,3 +21,5 @@ ajouter la config qui va bien dans app/config.yml
             email_from: email-from@email.fr
             email_to : email-to@email.fr
             email_subject: 'Nouveau contact sur tonsite.fr'
+            use_reCaptcha : true
+            reCaptcha_secret_key : 123456789azertyuiopqsdfghjklmwxcvbn987654321
